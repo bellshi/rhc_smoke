@@ -1,8 +1,12 @@
 #!/bin/sh
 
-BASEPATH=$(cd `dirname $0` ; pwd)
-BASEENV=$(python -V ; awk -F )
+BASE_PATH=$(cd `dirname $0` ; pwd)
+PYTHON = `which python`
 
-export PATH=$PATH:$BASEPATH/lib
+export PATH=$PATH:$BASEPATH/lib:$BASEPATH/config
 
-if ( $BASEENV)
+if [-z $PYTHON];then
+    echo 'Please install python.'
+    exit 0
+fi
+
