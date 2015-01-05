@@ -9,7 +9,8 @@ import pexpect
 import sys
 sys.path.append("../lib")
 from check import *
-from option import *
+#from option import *
+import option
 
 # Define
 
@@ -45,4 +46,4 @@ def Test():
 
 # Debug
 # Test()
-print Config().getConfig()
+print option.config
