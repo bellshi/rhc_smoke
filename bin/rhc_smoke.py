@@ -8,7 +8,9 @@
 import logging
 import logging.config
 import sys
+sys.path.append('..')
 sys.path.append('../lib')
+import case
 from option import *
 from setup import *
 
@@ -23,10 +25,10 @@ def main():
     init(cfg).setup()
     # run case
     log.info('rhc smoke test starting...')
-
-
-
-
+    
+    for caseID in range(1,4):
+        caseScript = eval('case.example%s.SmokeCase()' %caseID)
+        caseScript.Test()
 
 
 #DEBUG
