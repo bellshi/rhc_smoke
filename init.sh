@@ -1,12 +1,20 @@
 #!/bin/sh
 
-BASE_PATH=$(cd `dirname $0` ; pwd)
-PYTHON = `which python`
+BASEPATH=$(cd `dirname $0` ; pwd)
+echo $BASEPATH
 
-export PATH=$PATH:$BASEPATH/lib:$BASEPATH/config
+export PYTHONPATH=$PATHONPATH:$BASEPATH
 
-if [-z $PYTHON];then
-    echo 'Please install python.'
-    exit 0
-fi
+mv -f $HOME/.openshift/express.conf $HOME/.openshift/express.conf.bak
+cp config/express.conf $HOME/.openshift/
+echo "Copy Config File .... done"
+
+
+echo "Rhc Smoke Test Start ..."
+#./case/example1.py
+./case/example2.py
+
+
+
+
 

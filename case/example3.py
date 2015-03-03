@@ -7,13 +7,9 @@
 
 import pexpect
 import sys
-sys.path.append("../lib")
-from check import *
-#from option import *
-import option
 
 
-class SmokeCase : 
+class SmokeCase:
 
     # Define
 

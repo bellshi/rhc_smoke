@@ -7,29 +7,25 @@
 
 import logging
 import logging.config
-import sys
-sys.path.append('..')
-sys.path.append('../lib')
-import case
-from option import *
-from setup import *
+import lib.config
+import lib.setup
 
 
 def main():
-
+    # init log
     logging.config.fileConfig('../config/log.conf')
     log = logging.getLogger('rhc_smoke')
     # init log & config
-    cfg = config().setup()
+    cfg = lib.config.setup()
     # setup
-    init(cfg).setup()
+    lib.setup(cfg).setup()
     # run case
     log.info('rhc smoke test starting...')
-    
-    for caseID in range(1,4):
-        caseScript = eval('case.example%s.SmokeCase()' %caseID)
-        caseScript.Test()
+
+    for num in range(1, 4):
+        case = eval('case.example%s.SmokeCase()' % num)
+        case.Test()
 
 
-#DEBUG
+# DEBUG
 main()

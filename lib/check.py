@@ -5,16 +5,14 @@
 # 4.Jan.2015
 
 import pexpect
+import logging
 
-def check_no_input(cmd,check):
-    child = pexpect.spawn(cmd)
-    while True:
-        index = child.expect([check,pexpect.EOF,pexpect.TIMEOUT])
-        if(index == 0):
-            print 'Pass'
-            break
-        elif(index == 2):
-            pass
-        else:
-            print 'Fail'
-            break
+
+def check_no_input(cmd, check):
+    logger = logging.getLogger('check_no_input')
+    child = pexpect.spawn(cmd, timeout=60)
+    index = child.expect([check, pexpect.EOF])
+    if index == 0:
+        logger.info('<' + cmd + '> [pass]')
+    else:
+        logger.error('<' + cmd + '> Time out [fail]')
