@@ -6,6 +6,7 @@
 # Date : 4.Jan.2015
 
 import logging
+import logging.config
 import lib.config
 from lib.check import check_no_input
 import pexpect
@@ -30,6 +31,7 @@ class SmokeCase:
         return
 
     def test(self):
+        # debug logging.config.fileConfig('../config/log.conf')
         logger = logging.getLogger(self.case_name)
         logger.info('begin')
         # step 1

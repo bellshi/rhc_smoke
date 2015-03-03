@@ -8,16 +8,18 @@
 import logging
 import logging.config
 import lib.config
-from lib.check import check_no_input
+import pexpect
+import sys
 
 
 class SmokeCase:
-    case_name = 'rhc account verification - 3'
+    case_name = ''
 
-    step1_cmd = 'rhc account --server {0}'
-    step2_cmd = 'rhc account'
+    step1_cmd = ''
+    step2_cmd = ''
 
-    step1_check = 'Login {0} on {1}'
+    step1_check = ''
+    step2_check = ''
 
     def __init__(self, config):
         self.__cfg = config
@@ -31,12 +33,7 @@ class SmokeCase:
         logging.config.fileConfig('../config/log.conf')
         logger = logging.getLogger(self.case_name)
         logger.info('begin')
-        # step1
-        step1 = self.step1_cmd.format(self.server)
-        step1_check = self.step1_check.format(self.login, self.server)
-        check_no_input(step1, step1_check)
-        # step2
-        check_no_input(self.step2_cmd, step1_check)
+
         logger.info('end')
 
 
