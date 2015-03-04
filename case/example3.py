@@ -28,7 +28,7 @@ class SmokeCase:
 
     # Test
     def test(self):
-        logging.config.fileConfig('../config/log.conf')
+        # debug logging.config.fileConfig('../config/log.conf')
         logger = logging.getLogger(self.case_name)
         logger.info('begin')
         # step1
