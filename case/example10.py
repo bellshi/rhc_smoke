@@ -54,10 +54,15 @@ class SmokeCase:
         # step 3
         check_no_input(self.step3_cmd, self.step3_check)
         # step 4
-        os.system("mkdir appt | tar xzf app.tar.gz -C appt")
-        os.system("sed -i 's/Welcome to your PHP application on OpenShift/Modifying/g' appt/repo/index.php")
-        os.system("rm app.tar.gz")
-        os.system("tar czf app.tar.gz appt/ ")
+        # !!!!!!Problem
+        os.system("mv app/ app.bak/")
+        os.system("mkdir app | tar xzf app.tar.gz -C app")
+        os.system("sed -i 's/Welcome to your PHP application on OpenShift/Modifying/g' app/repo/index.php")
+        #os.system("rm app.tar.gz")
+        os.system("mv app.tar.gz appb.tar.gz")
+        os.system("tar czf app.tar.gz app/* ")
+        os.system("rm -rf app")
+        #os.system("mv app.bak/ app/")
         check_no_input(self.step4_cmd, self.step4_check)
         # step 5
         check_no_input(self.step5_cmd, self.step5_check)

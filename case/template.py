@@ -3,11 +3,12 @@
 # Project : rhc_smoke
 # Loc : /case
 # Author : cshi
-# Date : 4.Mar.2015
+# Date : 5.Mar.2015
 
 import logging
 import logging.config
 import lib.config
+from lib.check import *
 
 
 class SmokeCase:

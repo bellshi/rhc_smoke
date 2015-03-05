@@ -74,7 +74,7 @@ def compute_app_count():
     child = pexpect.spawn('rhc apps')
     child.expect(pexpect.EOF)
     apps = re.findall(r'(\w+)\s@\shttp', child.before)
-    logger.info('app counts : ' + apps.__len__())
+    logger.info('app counts : ' + str(apps.__len__()))
     return apps.__len__()
 
 
@@ -90,12 +90,23 @@ def check_unovercmd_app(cmd, check):
 
 
 def get_commit_id():
-    logger = logging.getLogger('check deployment activate')
+    logger = logging.getLogger('get commit id')
     child = pexpect.spawn('rhc deployment list -a app')
     child.expect(pexpect.TIMEOUT)
     commid = re.findall(r'deployment (\S+)$', child.before)
-    logger.info('commid id : ' + commid)
-    return commid
+    logger.info('commid id : ' + commid[0])
+    return commid[0]
+
+
+def get_haproxy_time(cmd):
+    logger = logging.getLogger('get haproxy time')
+    child = pexpect.spawn(cmd)
+    child.expect(pexpect.EOF)
+    haproxy = re.findall(r'haproxy', child.before)
+    logger.info('haproxy : ' + str(haproxy.__len__()))
+    return haproxy.__len__()
+
+
 
 # ================= cartridge ==========================
 def check_rhc_caritridge(cmd, check):
@@ -106,6 +117,15 @@ def check_rhc_caritridge(cmd, check):
         logger.info('< ' + cmd + ' > [pass]')
     else:
         logger.error('< ' + cmd + ' > [fail]')
+
+
+def get_additional_storage(cmd):
+    logger = logging.getLogger('get additional storage')
+    child = pexpect.spawn(cmd)
+    child.expect(pexpect.EOF)
+    storage = re.findall(r'Additional Gear Storage:\s(\d)GB', child.before)
+    logger.info('additional storage : ' + storage[0])
+    return int(storage[0])
 
 
 # ================= env ==============================
