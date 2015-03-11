@@ -107,7 +107,6 @@ def get_haproxy_time(cmd):
     return haproxy.__len__()
 
 
-
 # ================= cartridge ==========================
 def check_rhc_caritridge(cmd, check):
     logger = logging.getLogger('check rhc caritridge')
@@ -130,7 +129,7 @@ def get_additional_storage(cmd):
 
 # ================= env ==============================
 def check_remove_env(cmd):
-    logger = logging.getLogger('check rhc caritridge')
+    logger = logging.getLogger('check remove env')
     child = pexpect.spawn(cmd)
     index = child.expect('Are you sure you wish to remove the environment variable\(s\)', timeout=60)
     if index == 0:
@@ -140,3 +139,59 @@ def check_remove_env(cmd):
             logger.info('< ' + cmd + ' > [pass]')
     else:
         logger.error('< ' + cmd + ' > [fail]')
+
+
+# ================= team =============================
+def check_leave_team(cmd, password1, password2):
+    logger = logging.getLogger('check leave team')
+    child = pexpect.spawn(cmd)
+    index = child.expect(['Password', pexpect.EOF])
+    if index == 0:
+        child.sendline(password2)
+        index = child.expect('Leaving team.*done')
+        if index == 0:
+            logger.info('< ' + cmd + ' > [pass]')
+    elif index == 1:
+        logger.info('< ' + cmd + ' > [pass]')
+    else:
+        logger.error('< ' + cmd + ' > [fail]')
+    child.sendline('rhc account')
+    index = child.expect(['Password', pexpect.EOF])
+    if index == 0:
+        child.sendline(password1)
+
+
+# ================ authorization =====================
+def check_rhc_authorization(cmd):
+    logger = logging.getLogger('check rhc authorization')
+    child = pexpect.spawn(cmd)
+    index = child.expect(pexpect.EOF)
+    if index == 0:
+        token = re.findall(r'[\w+]{64}', child.before)
+        logger.info('< ' + cmd + ' > [pass]')
+    else:
+        logger.error('< ' + cmd + ' > [fail]')
+    return token[0]
+
+
+def check_authorization_list(cmd):
+    logger = logging.getLogger('check authorization list')
+    child = pexpect.spawn(cmd)
+    index = child.expect(pexpect.EOF)
+    authorizations = re.findall(r'abcd', child.before)
+    logger.info('authorization counts : ' + str(authorizations.__len__()))
+    if authorizations.__len__() == 3:
+        logger.info('< ' + cmd + ' > [pass]')
+    else:
+        logger.error('< ' + cmd + ' > [fail]')
+
+
+def check_authorization_list_after_delete_all(password):
+    logger = logging.getLogger('check authorization list after delete all')
+    child = pexpect.spawn('rhc authorization list')
+    index = child.expect('Password')
+    if index == 0:
+        child.sendline(password)
+        logger.info('< rhc authorization list after delete all > [fail]')
+    else:
+        logger.error('< rhc authorization list after delete all > [fail]')

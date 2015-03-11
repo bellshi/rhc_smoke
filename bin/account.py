@@ -7,6 +7,7 @@
 
 import pexpect
 import re
+import os
 
 class AccountUtil:
 
@@ -20,15 +21,15 @@ class AccountUtil:
         child.logfile = applist_log
         child.expect(pexpect.EOF)
         applist = open('applist.log').read()
-        apps = re.findall(r'(\w+)\s@\shttp',applist)
+        apps = re.findall(r'(\w+)\s@\shttp', applist)
         if apps:
-            for app in apps :
+            for app in apps:
                 child = pexpect.spawn('rhc app delete %s --confirm' % app)
                 child.expect('Deleting application*deleted')
             print 'All apps deleted.'
         else:
             print 'No apps to be deleted.'
-        child.spawn('rm applist.log')
+        os.system('rm applist.log')
 
     def init_account(self):
         self.delete_all_apps()

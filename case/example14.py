@@ -16,7 +16,7 @@ class SmokeCase:
 
     step1_cmd = 'rhc alias add app.com -a app'
     step2_cmd = 'rhc alias list -a app'
-    step3_cmd = 'rhc update-cert-alias app app.com --certificate server.crt --private-key server.key'
+    step3_cmd = 'rhc update-cert-alias app app.com --certificate ../config/server.crt --private-key ../config/server.key'
     step4_cmd = 'rhc alias delete-cert app app.com --confirm'
     step5_cmd = 'rhc alias remove app.com -a app'
 
@@ -35,7 +35,7 @@ class SmokeCase:
 
     # Test
     def test(self):
-        # debug logging.config.fileConfig('../config/log.conf')
+        logging.config.fileConfig('../config/log.conf')
         logger = logging.getLogger(self.case_name)
         logger.info('begin')
         # step 1

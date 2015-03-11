@@ -23,6 +23,8 @@ def setup(smokeconfig):
     print_config_info(smokeconfig)
     print_log_info()
 
+
+
 # DEBUG
 if __name__ == "__main__":
     cfg = config.setup()
