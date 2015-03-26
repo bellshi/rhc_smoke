@@ -6,7 +6,7 @@
 # Date : 30.Dec.2014
 
 cfg = {}
-config_path = '../config/express.conf'
+config_path = 'config/express.conf'
 
 def readconfig():
     cfile = open(config_path, 'r')

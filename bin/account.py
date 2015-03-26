@@ -9,13 +9,13 @@ import pexpect
 import re
 import os
 
+
 class AccountUtil:
 
     def __init__(self):
         return
 
     def delete_all_apps(self):
-
         child = pexpect.spawn('rhc apps')
         applist_log = file('applist.log','w')
         child.logfile = applist_log

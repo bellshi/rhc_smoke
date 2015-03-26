@@ -11,8 +11,8 @@ echo "Copy Config File .... done"
 
 
 echo "Rhc Smoke Test Start ..."
-#./case/example1.py
-./case/example2.py
+./bin/rhc_smoke.py
+echo "Rhc Smoke Test Finish ..."
 
 
 

@@ -8,24 +8,25 @@
 import logging
 import logging.config
 import lib.config
-import lib.setup
+import case
 
 
 def main():
     # init log
-    logging.config.fileConfig('../config/log.conf')
+    logging.config.fileConfig('config/log.conf')
     log = logging.getLogger('rhc_smoke')
     # init log & config
     cfg = lib.config.setup()
     # setup
-    lib.setup(cfg).setup()
+    # lib.setup(cfg) to show the information include {account, password, env}
     # run case
     log.info('rhc smoke test starting...')
 
-    for num in range(1, 4):
-        case = eval('case.example%s.SmokeCase()' % num)
-        case.Test()
+    for num in range(1, 18):
+        c = eval('case.example%s.SmokeCase(%s)' % (num, cfg))
+        c.test()
 
+    log.info('rhc smoke test finish...')
 
 # DEBUG
 main()

@@ -47,7 +47,7 @@ class SmokeCase:
 
     # Test
     def test(self):
-        logging.config.fileConfig('../config/log.conf')
+        #logging.config.fileConfig('../config/log.conf')
         logger = logging.getLogger(self.case_name)
         logger.info('begin')
         # step 1
@@ -87,10 +87,10 @@ class SmokeCase:
         # step 9
         check_authorization_list(self.step9_cmd)
         # step 10
-        # step10_cmd = self.step10_cmd.format(token3)
-        # check_no_input(step10_cmd, self.step10_check)
+        step10_cmd = self.step10_cmd.format(token3)
+        check_no_input(step10_cmd, self.step10_check)
         # step 11
-        # check_no_input(self.step11_cmd, self.step11_check)
+        check_no_input(self.step11_cmd, self.step11_check)
         # step 12
         check_authorization_list_after_delete_all(self.password)
         logger.info('end')

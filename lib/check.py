@@ -20,6 +20,25 @@ def check_no_input(cmd, check):
         logger.error('< ' + cmd + ' > [fail]')
 
 
+# =================== init   =====================
+def check_init_server(cmd, check, password):
+    logger = logging.getLogger('check_init_server')
+    logger.info('coming')
+    logger.info(cmd)
+    child = pexpect.spawn(cmd, timeout=120)
+    index = child.expect([check, 'Password', pexpect.EOF ,pexpect.TIMEOUT], timeout=None)
+    if index == 0:
+        logger.info('< ' + cmd + ' > [pass]')
+    elif index == 1:
+        child.sendline(password)
+        index = child.expect(check, timeout=None)
+        if index == 0:
+            logger.info('< ' + cmd + ' > [pass]')
+    elif index == 2:
+        logger.info('< ' + cmd + ' > [Timeout]')
+    else:
+        logger.error('< ' + cmd + ' > [fail]')
+
 # =================== server =====================
 def check_add_server(cmd, account, password):
     logger = logging.getLogger('check add server')
