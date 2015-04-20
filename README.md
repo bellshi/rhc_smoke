@@ -6,22 +6,22 @@ a framework for rhc_smoke test
 
 rhc smoke case link : https://tcms.engineering.redhat.com/plan/4962/test-plan-for-openshift-2-0#testcases
 
-add new case : wirte new case in rhc_smoke/case folder
+add new case : wirte new case in rhc_smoke/case folder.
 
 ### Setup
 
-Please prepare two account, one of them is update to silver plan
+Please prepare two accounts, one is updated to silver plan.
 
-then set them into rhc_smoke/config/express.conf 
+Then set them into rhc_smoke/config/express.conf. 
 
 ### How to Start
 
-git clone this repo<br>
+git clone this repo
 
-cd rhc_smoke<br>
+cd rhc_smoke
 
-./init.sh<br>
+./init.sh
 
 
-Enjoy it !<br>
+Enjoy it !
 If you have problems, please feel free to contact with cshi@redhat.com
