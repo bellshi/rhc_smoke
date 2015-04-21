@@ -1,0 +1,151 @@
+2015-04-21 09:04:25,669 - rhc_smoke - INFO - rhc smoke test starting...
+2015-04-21 09:04:25,669 - rhc setup verification - 1 - INFO - begin
+2015-04-21 09:04:25,669 - check_init_server - INFO - rhc setup -l cshi@redhat.com --server stg.openshift.redhat.com
+2015-04-21 09:04:35,023 - check_init_server - INFO - < rhc setup -l cshi@redhat.com --server stg.openshift.redhat.com > [pass]
+2015-04-21 09:04:42,316 - rhc setup verification - 1 - INFO - <rhc setup> [pass]
+2015-04-21 09:04:47,679 - check no input - INFO - < rhc setup --server stg.openshift.redhat.com > [pass]
+2015-04-21 09:04:47,780 - rhc setup verification - 1 - INFO - end
+2015-04-21 09:04:47,881 - rhc server verification - 2 - INFO - begin
+2015-04-21 09:04:48,136 - check no input - INFO - < rhc servers > [pass]
+2015-04-21 09:04:55,390 - check add server - INFO - < rhc server add int.openshift.redhat.com > [pass]
+2015-04-21 09:04:57,928 - check no input - INFO - < rhc server use --server int.openshift.redhat.com > [pass]
+2015-04-21 09:05:01,534 - check no input - INFO - < rhc logout > [pass]
+2015-04-21 09:05:01,903 - check no input - INFO - < rhc server remove stg.openshift.redhat.com > [pass]
+2015-04-21 09:05:10,585 - check add server - INFO - < rhc server add stg.openshift.redhat.com stage > [pass]
+2015-04-21 09:05:11,753 - check no input - INFO - < rhc server add a.com > [pass]
+2015-04-21 09:05:14,233 - check no input - INFO - < rhc server configure --hostname stg.openshift.redhat.com --nickname stgtest --server stg.openshift.redhat.com > [pass]
+2015-04-21 09:05:14,653 - check no input - INFO - < rhc server show --server stg.openshift.redhat.com > [pass]
+2015-04-21 09:05:17,241 - check no input - INFO - < rhc server status --server int.openshift.redhat.com > [pass]
+2015-04-21 09:05:19,698 - check no input - INFO - < rhc server use --server stg.openshift.redhat.com > [pass]
+2015-04-21 09:05:20,062 - check no input - INFO - < rhc server remove int.openshift.redhat.com > [pass]
+2015-04-21 09:05:20,163 - rhc server verification - 2 - INFO - end
+2015-04-21 09:05:20,163 - rhc account verification - 3 - INFO - begin
+2015-04-21 09:05:22,750 - check no input - INFO - < rhc account --server stg.openshift.redhat.com > [pass]
+2015-04-21 09:05:25,552 - check no input - INFO - < rhc account > [pass]
+2015-04-21 09:05:25,653 - rhc account verification - 3 - INFO - end
+2015-04-21 09:05:25,654 - rhc create app verification - 4 - INFO - begin
+2015-04-21 09:06:21,521 - check create app - INFO - < rhc app create app php-5.4 > [pass]
+2015-04-21 09:06:52,914 - check create app - INFO - < rhc app create app2 php-5.4 -g medium > [pass]
+2015-04-21 09:08:19,885 - check create app - INFO - < rhc app create app3 php-5.4 mysql-5.5 > [pass]
+2015-04-21 09:09:51,630 - check create app - INFO - < rhc app create sapp php-5.4 -s > [pass]
+2015-04-21 09:13:29,375 - check create app - INFO - < rhc app create app4 --from-app app > [pass]
+2015-04-21 09:16:59,578 - check create app - INFO - < rhc app create app5 php-5.4 mysql-5.1 --from-code https://github.com/openshift/wordpress-example.git -s > [pass]
+2015-04-21 09:19:06,871 - check create app - INFO - < rhc app create app6 php-5.4 --enable-jenkins > [pass]
+2015-04-21 09:19:06,972 - rhc create app verification - 4 - INFO - end
+2015-04-21 09:19:06,973 - rhc add cartridge verification - 5 - INFO - begin
+2015-04-21 09:19:41,791 - check no input - INFO - < rhc cartridge add mysql-5.1 -a app > [pass]
+2015-04-21 09:20:07,037 - check no input - INFO - < rhc cartridge add postgresql-9.2 -a sapp -g medium > [pass]
+2015-04-21 09:20:07,138 - rhc add cartridge verification - 5 - INFO - end
+2015-04-21 09:20:07,138 - rhc apps and cartridges verification - 6 - INFO - begin
+2015-04-21 09:20:14,886 - compute app count - INFO - app counts : 8
+2015-04-21 09:20:20,466 - check no input - INFO - < rhc apps > [pass]
+2015-04-21 09:20:26,230 - check no input - INFO - < rhc apps --summary > [pass]
+2015-04-21 09:20:34,956 - check no input - INFO - < rhc apps --mine > [pass]
+2015-04-21 09:21:05,085 - check rhc caritridge - INFO - < rhc cartridges > [pass]
+2015-04-21 09:21:05,186 - rhc apps and cartridges verification - 6 - INFO - end
+2015-04-21 09:21:05,187 - rhc env verification - 7 - INFO - begin
+2015-04-21 09:21:09,493 - check no input - INFO - < rhc env set a= b=123 -a app > [pass]
+2015-04-21 09:21:13,443 - check no input - INFO - < rhc env list -a app > [pass]
+2015-04-21 09:21:17,439 - check no input - INFO - < rhc env list -a app > [pass]
+2015-04-21 09:21:21,401 - check no input - INFO - < rhc env show -a app -e a > [pass]
+2015-04-21 09:21:25,636 - check remove env - INFO - < rhc env unset -a app -e a -e b > [pass]
+2015-04-21 09:21:25,737 - rhc env verification - 7 - INFO - end
+2015-04-21 09:21:25,738 - rhc tail/port-forward/threaddump verification - 8 - INFO - begin
+2015-04-21 09:21:45,746 - check unovercmd app - INFO - < rhc tail app > [pass]
+2015-04-21 09:22:06,249 - check unovercmd app - INFO - < rhc port-forward app > [pass]
+2015-04-21 09:23:05,470 - check create app - INFO - < rhc app create ajboss jbossas-7 > [pass]
+2015-04-21 09:23:10,339 - check no input - INFO - < rhc threaddump ajboss > [pass]
+2015-04-21 09:23:10,440 - rhc tail/port-forward/threaddump verification - 8 - INFO - end
+2015-04-21 09:23:10,440 - Use rhc to control app and snapshot verification - 9 - INFO - begin
+2015-04-21 09:23:20,160 - check no input - INFO - < rhc app start -a app > [pass]
+2015-04-21 09:23:28,668 - check no input - INFO - < rhc app stop -a app > [pass]
+2015-04-21 09:23:45,373 - check no input - INFO - < rhc snapshot save -a app > [pass]
+2015-04-21 09:24:45,531 - check no input - ERROR - < rhc snapshot restore -a app > [fail]
+2015-04-21 09:24:48,981 - check no input - ERROR - < rhc app show -a app --state > [fail]
+2015-04-21 09:24:54,488 - check no input - INFO - < rhc app force-stop -a app > [pass]
+2015-04-21 09:25:24,801 - check no input - INFO - < rhc app restart app > [pass]
+2015-04-21 09:25:30,453 - check no input - INFO - < rhc app reload app > [pass]
+2015-04-21 09:25:30,554 - Use rhc to control app and snapshot verification - 9 - INFO - end
+2015-04-21 09:25:30,554 - rhc deploy process verification - 10 - INFO - begin
+2015-04-21 09:25:35,552 - check no input - INFO - < rhc app-configure -a app --no-auto-deploy --deployment-type binary > [pass]
+2015-04-21 09:25:43,779 - check no input - INFO - < rhc git-clone app > [pass]
+2015-04-21 09:25:51,915 - check no input - INFO - < rhc snapshot save app --deployment > [pass]
+2015-04-21 09:26:52,064 - check no input - ERROR - < rhc deploy -a app --ref app.tar.gz --hot-deploy > [fail]
+2015-04-21 09:26:58,879 - check no input - INFO - < rhc app-configure -a app --auto-deploy --deployment-type git --keep-deployments 2 > [pass]
+2015-04-21 09:27:02,860 - check no input - INFO - < rhc deployment list -a app > [pass]
+2015-04-21 09:27:02,961 - rhc deploy process verification - 10 - INFO - end
+2015-04-21 09:27:02,962 - rhc cartridge scale verification - 11 - INFO - begin
+2015-04-21 09:27:59,085 - check no input - INFO - < rhc cartridge scale php-5.4 -a sapp --min 2 --max 4 > [pass]
+2015-04-21 09:28:59,228 - check no input - ERROR - < rhc app scale-up -a sapp > [fail]
+2015-04-21 09:29:59,679 - check no input - ERROR - < rhc app scale-up -a sapp > [fail]
+2015-04-21 09:30:11,760 - check no input - INFO - < rhc app scale-up -a sapp > [pass]
+2015-04-21 09:30:43,912 - check no input - INFO - < rhc app scale-down -a sapp > [pass]
+2015-04-21 09:31:21,900 - check no input - INFO - < rhc app scale-down -a sapp > [pass]
+2015-04-21 09:31:25,859 - check no input - ERROR - < rhc app scale-down -a sapp > [fail]
+2015-04-21 09:31:29,924 - check no input - INFO - < rhc cartridge scale php-5.4 -a sapp --min 1 > [pass]
+2015-04-21 09:31:55,931 - check no input - INFO - < rhc app scale-down sapp > [pass]
+2015-04-21 09:31:56,032 - rhc cartridge scale verification - 11 - INFO - end
+2015-04-21 09:31:56,032 - rhc cartridge control verification - 12 - INFO - begin
+2015-04-21 09:32:01,813 - check no input - INFO - < rhc cartridge stop -a app -c php-5.4  > [pass]
+2015-04-21 09:32:12,259 - check no input - INFO - < rhc cartridge start -a app -c php-5.4  > [pass]
+2015-04-21 09:32:22,190 - check no input - INFO - < rhc cartridge restart -a app -c php-5.4  > [pass]
+2015-04-21 09:32:27,922 - check no input - INFO - < rhc cartridge reload -a app -c php-5.4  > [pass]
+2015-04-21 09:32:33,046 - check no input - INFO - < rhc cartridge status -a app -c php-5.4  > [pass]
+2015-04-21 09:32:37,926 - check no input - ERROR - < rhc cartridge add mysql-5.1 -a app > [fail]
+2015-04-21 09:32:41,384 - check no input - INFO - < rhc cartridge storage -a app -c mysql-5.1 > [pass]
+2015-04-21 09:32:44,899 - get additional storage - INFO - additional storage : 5
+2015-04-21 09:32:50,072 - check no input - ERROR - < rhc cartridge storage --add 1GB -a app -c mysql-5.1 > [fail]
+2015-04-21 09:32:56,265 - check no input - INFO - < rhc cartridge remove mysql-5.1 -a app --confirm > [pass]
+2015-04-21 09:32:56,366 - rhc cartridge control verification - 12 - INFO - end
+2015-04-21 09:32:56,366 - rhc enable-ha verification - 13 - INFO - begin
+2015-04-21 09:32:56,366 - rhc enable-ha verification - 13 - INFO - This case is only for devenv [pass]
+2015-04-21 09:32:56,366 - rhc enable-ha verification - 13 - INFO - end
+2015-04-21 09:32:56,366 - rhc alias verification - 14 - INFO - begin
+2015-04-21 09:33:04,936 - check no input - INFO - < rhc alias add app.com -a app > [pass]
+2015-04-21 09:33:08,370 - check no input - INFO - < rhc alias list -a app > [pass]
+2015-04-21 09:33:08,826 - check no input - ERROR - < rhc update-cert-alias app app.com --certificate ../config/server.crt --private-key ../config/server.key > [fail]
+2015-04-21 09:33:14,846 - check no input - INFO - < rhc alias delete-cert app app.com --confirm > [pass]
+2015-04-21 09:33:23,417 - check no input - INFO - < rhc alias remove app.com -a app > [pass]
+2015-04-21 09:33:23,518 - rhc alias verification - 14 - INFO - end
+2015-04-21 09:33:23,518 - rhc scp verification - 15 - INFO - begin
+2015-04-21 09:33:30,839 - check no input - INFO - < rhc scp app upload testfile app-root/data > [pass]
+2015-04-21 09:33:37,968 - check no input - INFO - < rhc ssh app "ls app-root/data" > [pass]
+2015-04-21 09:33:45,153 - check no input - INFO - < ls | grep testfile > [pass]
+2015-04-21 09:33:45,253 - rhc scp verification - 15 - INFO - end
+2015-04-21 09:33:45,254 - rhc team verification - 16 - INFO - begin
+2015-04-21 09:33:47,823 - check no input - ERROR - < rhc team create smoke > [fail]
+2015-04-21 09:33:50,420 - check no input - INFO - < rhc team list > [pass]
+2015-04-21 09:33:53,296 - check no input - INFO - < rhc team show smoke > [pass]
+2015-04-21 09:33:56,197 - check no input - INFO - < rhc member add ruliu@redhat.com -t smoke > [pass]
+2015-04-21 09:34:01,980 - check no input - INFO - < rhc member add smoke -n cshi --type team -r admin > [pass]
+2015-04-21 09:34:05,021 - check no input - INFO - < rhc member list -n cshi > [pass]
+2015-04-21 09:34:07,660 - check no input - INFO - < rhc member list -n cshi --all > [pass]
+2015-04-21 09:34:12,925 - check no input - INFO - < rhc member remove smoke -n cshi --type team > [pass]
+2015-04-21 09:34:15,822 - check no input - INFO - < rhc team leave -t smoke > [pass]
+2015-04-21 09:34:50,170 - rhc team verification - 16 - INFO - end
+2015-04-21 09:34:50,171 - rhc member verification - 17 - INFO - begin
+2015-04-21 09:34:56,089 - check no input - INFO - < rhc member add ruliu@redhat.com -n cshi -r admin > [pass]
+2015-04-21 09:34:59,124 - check no input - INFO - < rhc member update cshi@redhat.com -n cshi -r edit -l cshi@redhat.com > [pass]
+2015-04-21 09:35:05,745 - check no input - INFO - < rhc member remove ruliu@redhat.com -n cshi > [pass]
+2015-04-21 09:35:11,941 - check no input - INFO - < rhc member add ruliu@redhat.com -n cshi -r edit > [pass]
+2015-04-21 09:36:02,777 - check create app - INFO - < rhc app create teamapp php-5.4 > [pass]
+2015-04-21 09:36:09,898 - check no input - INFO - < rhc member remove ruliu@redhat.com -n cshi > [pass]
+2015-04-21 09:36:14,484 - check no input - INFO - < rhc member add ruliu@redhat.com -n cshi -r view > [pass]
+2015-04-21 09:37:14,639 - check no input - ERROR - < rhc app start -a teamapp -l ruliu@redhat.com > [fail]
+2015-04-21 09:37:15,040 - rhc member verification - 17 - INFO - end
+2015-04-21 09:37:15,041 - rhc authorization verification - 18 - INFO - begin
+2015-04-21 09:37:18,711 - check rhc authorization - INFO - < rhc authorization add --scopes session --note abcd --expire 3600 > [pass]
+2015-04-21 09:38:09,925 - check create app - INFO - < rhc app create qphp php-5.3 --token 3bd704a1dcbc0041cb9b0e9df15c3e8f464d112fb56a45aebd287c4b6c661956 > [pass]
+2015-04-21 09:38:13,650 - check rhc authorization - INFO - < rhc authorization add --scopes read --note abcd --expire 3600 > [pass]
+2015-04-21 09:38:17,577 - check no input - INFO - < rhc app create qphp2 php-5.3 --token 56f5b6ef4a26fbc4b78127e5db119f7b113265c1c1d7a5b006dc50c553a24b02 > [pass]
+2015-04-21 09:38:21,262 - check no input - INFO - < rhc app show qphp --token 56f5b6ef4a26fbc4b78127e5db119f7b113265c1c1d7a5b006dc50c553a24b02 > [pass]
+2015-04-21 09:38:27,253 - check rhc authorization - INFO - < rhc authorization add --scopes userinfo --note abcd --expire 3600 > [pass]
+2015-04-21 09:38:29,767 - check no input - INFO - < rhc app show qphp --token db6faa72469e8ff65c26e25ed458a7cef859e9262c5c290ca01ada24d8095296 > [pass]
+2015-04-21 09:38:32,187 - check no input - INFO - < rhc account --token db6faa72469e8ff65c26e25ed458a7cef859e9262c5c290ca01ada24d8095296 > [pass]
+2015-04-21 09:38:34,752 - check authorization list - INFO - authorization counts : 4
+2015-04-21 09:38:34,752 - check authorization list - ERROR - < rhc authorization list > [fail]
+2015-04-21 09:38:38,372 - check no input - INFO - < rhc authorization delete --auth-token db6faa72469e8ff65c26e25ed458a7cef859e9262c5c290ca01ada24d8095296 > [pass]
+2015-04-21 09:38:40,813 - check no input - INFO - < rhc authorization delete-all > [pass]
+2015-04-21 09:38:45,474 - check authorization list after delete all - INFO - < rhc authorization list after delete all > [fail]
+2015-04-21 09:38:45,875 - rhc authorization verification - 18 - INFO - end
+2015-04-21 09:38:45,875 - rhc_smoke - INFO - rhc smoke test finish...

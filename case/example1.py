@@ -32,12 +32,12 @@ class SmokeCase:
         return
 
     def test(self):
-        # logging.config.fileConfig('../config/log.conf')
+        #logging.config.fileConfig('../config/log.conf')
         logger = logging.getLogger(self.case_name)
         logger.info('begin')
         # step 1
-        #step1 = self.step1_cmd.format(self.login, self.server)
-        #check_init_server(step1, self.step1_check, self.password)
+        step1 = self.step1_cmd.format(self.login, self.server)
+        check_init_server(step1, self.step1_check, self.password)
         # step 2
         child = pexpect.spawn(self.step2_cmd)
         index = child.expect(['Enter the server hostname', pexpect.EOF])

@@ -48,5 +48,5 @@ class SmokeCase:
 
 
 # Debug
-cfg = lib.config.setup()
-SmokeCase(cfg).test()
+#cfg = lib.config.setup()
+#SmokeCase(cfg).test()

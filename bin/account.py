@@ -7,29 +7,20 @@
 
 import pexpect
 import re
-import os
 
 
-class AccountUtil:
+def delete_all_apps():
+    child = pexpect.spawn('rhc apps')
+    child.expect([pexpect.EOF, pexpect.TIMEOUT])
+    apps = re.findall(r'.+?(?=\s@)', child.before)
+    if apps:
+        for app in apps:
+            child = pexpect.spawn('rhc app delete %s --confirm' % app)
+            child.expect(['Deleting application.*deleted', pexpect.TIMEOUT])
+        print 'All apps deleted.'
+    else:
+        print 'No apps to be deleted.'
 
-    def __init__(self):
-        return
 
-    def delete_all_apps(self):
-        child = pexpect.spawn('rhc apps')
-        applist_log = file('applist.log','w')
-        child.logfile = applist_log
-        child.expect(pexpect.EOF)
-        applist = open('applist.log').read()
-        apps = re.findall(r'(\w+)\s@\shttp', applist)
-        if apps:
-            for app in apps:
-                child = pexpect.spawn('rhc app delete %s --confirm' % app)
-                child.expect('Deleting application*deleted')
-            print 'All apps deleted.'
-        else:
-            print 'No apps to be deleted.'
-        os.system('rm applist.log')
-
-    def init_account(self):
-        self.delete_all_apps()
+# Main
+delete_all_apps()

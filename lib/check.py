@@ -13,7 +13,7 @@ import re
 def check_no_input(cmd, check):
     logger = logging.getLogger('check no input')
     child = pexpect.spawn(cmd, timeout=60)
-    index = child.expect([check, pexpect.EOF], timeout=None)
+    index = child.expect([check, pexpect.EOF, pexpect.TIMEOUT])
     if index == 0:
         logger.info('< ' + cmd + ' > [pass]')
     else:
@@ -23,21 +23,33 @@ def check_no_input(cmd, check):
 # =================== init   =====================
 def check_init_server(cmd, check, password):
     logger = logging.getLogger('check_init_server')
-    logger.info('coming')
     logger.info(cmd)
-    child = pexpect.spawn(cmd, timeout=120)
-    index = child.expect([check, 'Password', pexpect.EOF ,pexpect.TIMEOUT], timeout=None)
+    child = pexpect.spawn(cmd)
+    index = child.expect([check, 'Password', 'Generate a token now', pexpect.TIMEOUT, pexpect.EOF])
     if index == 0:
         logger.info('< ' + cmd + ' > [pass]')
     elif index == 1:
         child.sendline(password)
-        index = child.expect(check, timeout=None)
+        index = child.expect([check, 'Generate a token now'])
         if index == 0:
             logger.info('< ' + cmd + ' > [pass]')
+        elif index == 1:
+            child.sendline('yes')
+            index = child.expect(check)
+            if index == 0:
+                logger.info('< ' + cmd + ' > [pass]')
+            else:
+                logger.info('< ' + cmd + ' > [fail]')
     elif index == 2:
+        child.sendline('yes')
+        index = child.expect(check)
+        if index == 0:
+            logger.info('< ' + cmd + ' > [pass]')
+    elif index == 3:
         logger.info('< ' + cmd + ' > [Timeout]')
     else:
         logger.error('< ' + cmd + ' > [fail]')
+
 
 # =================== server =====================
 def check_add_server(cmd, account, password):
@@ -92,7 +104,7 @@ def compute_app_count():
     logger = logging.getLogger('compute app count')
     child = pexpect.spawn('rhc apps')
     child.expect(pexpect.EOF)
-    apps = re.findall(r'(\w+)\s@\shttp', child.before)
+    apps = re.findall(r'.+?(?=\s@)', child.before)
     logger.info('app counts : ' + str(apps.__len__()))
     return apps.__len__()
 
@@ -108,11 +120,22 @@ def check_unovercmd_app(cmd, check):
         logger.info('< ' + cmd + ' > [fail]')
 
 
+def recovery_account_after_expired(passwd):
+    logger = logging.getLogger('recovery account after expired')
+    child = pexpect.spawn('rhc apps')
+    index = child.expect(['Password', pexpect.TIMEOUT])
+    if index == 0:
+        child.sendline(passwd)
+        logger.info('recovery account after expired ... succeed')
+
+
 def get_commit_id():
     logger = logging.getLogger('get commit id')
     child = pexpect.spawn('rhc deployment list -a app')
-    child.expect(pexpect.TIMEOUT)
-    commid = re.findall(r'deployment (\S+)$', child.before)
+    child.expect(pexpect.EOF)
+    logger.info(child.before)
+    logger.info('-------------------')
+    commid = re.findall(r'(\w+){8}$', child.before)
     logger.info('commid id : ' + commid[0])
     return commid[0]
 
@@ -141,7 +164,7 @@ def get_additional_storage(cmd):
     logger = logging.getLogger('get additional storage')
     child = pexpect.spawn(cmd)
     child.expect(pexpect.EOF)
-    storage = re.findall(r'Additional Gear Storage:\s(\d)GB', child.before)
+    storage = re.findall(r'\d', child.before)
     logger.info('additional storage : ' + storage[0])
     return int(storage[0])
 
@@ -164,10 +187,10 @@ def check_remove_env(cmd):
 def check_leave_team(cmd, password1, password2):
     logger = logging.getLogger('check leave team')
     child = pexpect.spawn(cmd)
-    index = child.expect(['Password', pexpect.EOF])
+    index = child.expect(['Password', pexpect.EOF, pexpect.TIMEOUT])
     if index == 0:
         child.sendline(password2)
-        index = child.expect('Leaving team.*done')
+        index = child.expect(['Leaving team.*done', pexpect.TIMEOUT])
         if index == 0:
             logger.info('< ' + cmd + ' > [pass]')
     elif index == 1:

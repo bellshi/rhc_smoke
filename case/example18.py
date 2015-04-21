@@ -93,10 +93,11 @@ class SmokeCase:
         check_no_input(self.step11_cmd, self.step11_check)
         # step 12
         check_authorization_list_after_delete_all(self.password)
+        recovery_account_after_expired(self.password)
         logger.info('end')
 
 
 # Debug
-cfg = lib.config.setup()
-SmokeCase(cfg).test()
-__author__ = 'cfshi'
+#cfg = lib.config.setup()
+#SmokeCase(cfg).test()
+#__author__ = 'cfshi'

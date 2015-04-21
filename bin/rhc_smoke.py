@@ -22,7 +22,7 @@ def main():
     # run case
     log.info('rhc smoke test starting...')
 
-    for num in range(1, 18):
+    for num in range(1, 19):
         c = eval('case.example%s.SmokeCase(%s)' % (num, cfg))
         c.test()
 

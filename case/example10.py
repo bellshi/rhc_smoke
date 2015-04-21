@@ -67,21 +67,20 @@ class SmokeCase:
         # step 5
         check_no_input(self.step5_cmd, self.step5_check)
         # step 6
-
         # step 7
         check_no_input(self.step7_cmd, self.step7_check)
         # step 8
-        commit_id = get_commit_id()
-        step8_cmd = self.step8_cmd.format(commit_id)
-        check_no_input(step8_cmd, self.step8_check)
+        # commit_id = get_commit_id()
+        # step8_cmd = self.step8_cmd.format(commit_id)
+        # check_no_input(step8_cmd, self.step8_check)
         # step 9
-        check_no_input(self.step7_cmd, self.step9_check)
+        # check_no_input(self.step7_cmd, self.step9_check)
         # step 10
-        step10_cmd = self.step10_cmd.format(commit_id)
-        check_no_input(step10_cmd, self.step10_check)
+        # step10_cmd = self.step10_cmd.format(commit_id)
+        # check_no_input(step10_cmd, self.step10_check)
         logger.info('end')
 
 
 # Debug
-cfg = lib.config.setup()
-SmokeCase(cfg).test()
+#cfg = lib.config.setup()
+#SmokeCase(cfg).test()

@@ -74,5 +74,5 @@ class SmokeCase:
         logger.info('end')
 
 # Debug
-cfg = lib.config.setup()
-SmokeCase(cfg).test()
+#cfg = lib.config.setup()
+#SmokeCase(cfg).test()
