@@ -28,6 +28,8 @@ detail log is in rhc_smoke/log
 
 fail result is in rhc_smoke/result
 
+-------------------------------------
+
 Enjoy it !
 
 If you have problems, please feel free to contact with cshi@redhat.com
